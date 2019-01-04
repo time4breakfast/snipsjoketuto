@@ -50,16 +50,10 @@ class JokeTuto(object):
 
         if category is None:
             joke_msg = str(requests.get("https://api.chucknorris.io/jokes/random").json().get("value"))
-            new_people =  self.config.get("secret").get("protagonist")
-            if new_people is not None and new_people is not "":
-                joke_msg = joke_msg.replace('Chuck Norris', new_people)
 
         else:
             joke_msg = str(requests.get("https://api.chucknorris.io/jokes/random?category={}".format(category))\
                                                                 .json().get("value"))
-            new_people =  self.config.get("secret").get("protagonist")
-            if new_people is not None and new_people is not "":
-                joke_msg = joke_msg.replace('Chuck Norris', new_people)
 
         # if need to speak the execution result by tts
         hermes.publish_start_session_notification(intent_message.site_id, joke_msg, "Joke_Tuto_APP")
